@@ -1,183 +1,515 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Working Image Compressor</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --background: #f8fafc;
-        }
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication31;
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 2rem;
-            background: var(--background);
-        }
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.*;
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+/**
+ *
+ * @author Mohd Tajammul
+ */
+public class JavaApplication31 {
+    
+static int x[][]= new int[6][6];
+static char ch[][]=new char[6][6];
+static char sy[][]=new char[6][6];
+static int counter;
+static int counter1;
+static int counter2;
 
-        .upload-box {
-            border: 2px dashed #ccc;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            cursor: pointer;
-        }
+    /**
+     *
+     */
+    public static String s="abcd";
+    
+//static char y[][]= new char[6][6];
 
-        .previews {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .preview-img {
-            max-width: 100%;
-            height: 300px;
-            object-fit: contain;
-            background: #f8f9fa;
-            border-radius: 5px;
-        }
-
-        #downloadBtn {
-            background: var(--primary);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: none;
-            margin-top: 1rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Image Compressor</h1>
-        
-        <div class="upload-box" onclick="document.getElementById('fileInput').click()">
-            <input type="file" id="fileInput" accept="image/*" hidden>
-            <p>Click to upload image</p>
-            <p>Supported formats: JPG, PNG, WEBP</p>
-        </div>
-
-        <div>
-            <label>Quality: <span id="qualityValue">80</span>%</label>
-            <input type="range" id="quality" min="1" max="100" value="80" style="width: 200px">
-            <button onclick="startCompression()">Compress</button>
-        </div>
-
-        <div class="previews">
-            <div>
-                <h3>Original</h3>
-                <img id="originalPreview" class="preview-img">
-                <p id="originalSize"></p>
-            </div>
-            <div>
-                <h3>Compressed</h3>
-                <img id="compressedPreview" class="preview-img">
-                <p id="compressedSize"></p>
-                <button id="downloadBtn">Download</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const fileInput = document.getElementById('fileInput');
-        const quality = document.getElementById('quality');
-        const qualityValue = document.getElementById('qualityValue');
-        const originalPreview = document.getElementById('originalPreview');
-        const compressedPreview = document.getElementById('compressedPreview');
-        const originalSize = document.getElementById('originalSize');
-        const compressedSize = document.getElementById('compressedSize');
-        const downloadBtn = document.getElementById('downloadBtn');
-
-        let currentFile = null;
-        let compressedBlob = null;
-
-        // Update quality display
-        quality.addEventListener('input', () => {
-            qualityValue.textContent = quality.value;
-        });
-
-        // Handle file selection
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        System.out.println("The Original Text");
+        java.io.File file= new java.io.File("Sample1Mb.txt");
+        try{ 
+            Scanner input= new Scanner(file);
             
-            currentFile = file;
-            originalPreview.src = URL.createObjectURL(file);
-            originalSize.textContent = `Size: ${formatBytes(file.size)}`;
-            compressedPreview.src = '';
-            compressedSize.textContent = '';
-            downloadBtn.style.display = 'none';
-        });
+            while(input.hasNext())
+            { //int n;
+               s= input.nextLine();
+              char[] c=s.toCharArray();
+             System.out.println(c);
+             //System.out.print(s);
+              int sz=c.length;
+              //System.out.print(sz);
+              for(int i=0; i<sz; i++)
+              {
+                  switch(c[i])
+                  {
+                      case 'a':x[0][0]=x[0][0]+1;
+                          break;
+                      case 'b':x[0][1]=x[0][1]+1; 
+                           break;
+                      case 'c':x[0][2]=x[0][2]+1;
+                           break;
+                      case 'd':x[0][3]=x[0][3]+1; 
+                           break;
+                      case 'e':x[0][4]=x[0][4]+1;
+                           break;
+                      case 'f':x[0][5]=x[0][5]+1; 
+                           break;
+                      case 'g':x[1][0]=x[1][0]+1;
+                           break;
+                      case 'h':x[1][1]=x[1][1]+1;
+                           break;
+                      case 'i':x[1][2]=x[1][2]+1;
+                           break;
+                      case 'j':x[1][3]=x[1][3]+1;  
+                           break;
+                      case 'k':x[1][4]=x[1][4]+1;
+                           break;
+                      case 'l':x[1][5]=x[1][5]+1;
+                           break;
+                      case 'm':x[2][0]=x[2][0]+1;
+                           break;
+                      case 'n':x[2][1]=x[2][1]+1; 
+                           break;
+                      case 'o':x[2][2]=x[2][2]+1;
+                           break;
+                      case 'p':x[2][3]=x[2][3]+1;
+                           break;
+                      case 'q':x[2][4]=x[2][4]+1;
+                           break;
+                      case 'r':x[2][5]=x[2][5]+1; 
+                           break;
+                      case 's':x[3][0]=x[3][0]+1;
+                           break;
+                      case 't':x[3][1]=x[3][1]+1; 
+                           break;
+                      case 'u':x[3][2]=x[3][2]+1;
+                           break;
+                      case 'v':x[3][3]=x[3][3]+1; 
+                           break;
+                      case 'w':x[3][4]=x[3][4]+1;
+                           break;
+                      case 'x':x[3][5]=x[3][5]+1;
+                           break;
+                      case 'y':x[4][0]=x[4][0]+1;
+                           break;
+                      case 'z':x[4][1]=x[4][1]+1; 
+                           break;
+                      case '0':x[4][2]=x[4][2]+1;
+                           break;
+                      case '1':x[4][3]=x[4][3]+1;
+                           break;
+                      case '2':x[4][4]=x[4][4]+1;
+                           break;
+                      case '3':x[4][5]=x[4][5]+1; 
+                           break;
+                      case '4':x[5][0]=x[5][0]+1;
+                           break;
+                      case '5':x[5][1]=x[5][1]+1;
+                           break;
+                      case '6':x[5][2]=x[5][2]+1;
+                           break;
+                      case '7':x[5][3]=x[5][3]+1; 
+                           break;
+                      case '8':x[5][4]=x[5][4]+1;
+                           break;
+                      case '9':x[5][5]=x[5][5]+1;
+                           break;
+                  }
+              }
+                         
 
-        // Main compression function
-        function startCompression() {
-            if (!currentFile) {
-                alert('Please select an image first');
-                return;
+     
             }
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-
-                    // Handle different image types
-                    let mimeType = 'image/jpeg';
-                    if (currentFile.type === 'image/png') mimeType = 'image/png';
-                    if (currentFile.type === 'image/webp') mimeType = 'image/webp';
-
-                    canvas.toBlob((blob) => {
-                        compressedPreview.src = URL.createObjectURL(blob);
-                        compressedSize.textContent = `Size: ${formatBytes(blob.size)}`;
-                        compressedBlob = blob;
-                        downloadBtn.style.display = 'block';
-                    }, mimeType, quality.value/100);
-                };
-                img.onerror = () => alert('Error loading image');
-                img.src = e.target.result;
-            };
-            reader.onerror = () => alert('Error reading file');
-            reader.readAsDataURL(currentFile);
-        }
-
-        // Download handler
-        downloadBtn.addEventListener('click', () => {
-            if (!compressedBlob) return;
             
-            const link = document.createElement('a');
-            link.download = `compressed_${currentFile.name}`;
-            link.href = URL.createObjectURL(compressedBlob);
-            link.click();
-            URL.revokeObjectURL(link.href);
-        });
-
-        // Format bytes to readable string
-        function formatBytes(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+            }
+        catch(FileNotFoundException e){
+          System.err.format("file does not exist\n");  
         }
-    </script>
-</body>
-</html>
+          // System.out.println("Frequency Matrix of given file is as under:");
+            for(int i=0;i<6;i++)
+            {
+                for(int j=0;j<6;j++)
+                {
+            //System.out.print(x[i][j]);
+           // System.out.print("\t\t");
+            }
+               // System.out.println("");
+        }
+   //System.out.println("Reduced Matrix of calculated Frequecny Matrix is as under:");
+            for(int i=0;i<6;i++)
+            {
+                for(int j=0;j<6;j++)
+                {x[i][j]=x[i][j]%17;
+           // System.out.print(x[i][j]);
+           // System.out.print("\t\t");
+            }
+            //    System.out.println("");
+        }         
+        
+            
+            
+           // System.out.println("");
+        
+       // System.out.println("The Encoded character Matrix of Reduced Matrix is as under:");
+   
+       for(int i=0; i<6; i++)
+       {
+           for(int j=0; j<6; j++)
+           {
+               //System.out.println(x[0][4]);
+               if((i>=4 && j>=2)||(i>=5 && j>=0))
+                   
+               {
+                   //int counter=0;
+               ch[i][j]=(char)(57-counter);
+               counter++;
+               }
+               else
+                   
+             ch[i][j]=(char)(97+i+j+x[i][j]);
+            // System.out.print(ch[i][j]);  
+           // System.out.print("\t\t");
+           }
+         // System.out.println("");
+       }
+    
+       sy[0][0]='+';
+       sy[0][1]='-';
+       sy[0][2]='*';
+       sy[0][3]='/';
+       sy[0][4]='%';   
+       sy[0][5]='<';
+       sy[1][0]='>';
+       sy[1][1]='=';
+       sy[1][2]='!';
+       sy[1][3]='&';
+       sy[1][4]='|';   
+       sy[1][5]='?';
+       sy[2][0]='`';
+       sy[2][1]='{';
+       sy[2][2]='}';
+       sy[2][3]='(';
+       sy[2][4]=')';   
+       sy[2][5]='[';
+       sy[3][0]=']';
+       sy[3][1]='$';
+       sy[3][2]='#';
+       sy[3][3]='@'; 
+       sy[3][4]='~';
+       sy[3][5]='^';   
+       sy[4][0]=';';
+       sy[4][1]=':';
+       sy[4][2]=' ';
+       sy[4][3]=' ';
+       sy[4][4]=' ';
+       sy[4][5]=' ';
+       sy[5][0]=' ';   
+       sy[5][1]=' ';
+       sy[5][2]=' ';
+       sy[5][3]=' ';
+       sy[5][4]=' ';
+       sy[5][5]=' ';
+       
+       
+    // System.out.println("The symbol matrix is as under"); 
+       
+     for(int i=0; i<6; i++)
+       {
+           for(int j=0; j<6; j++)
+           {
+            //    System.out.print(sy[i][j]);
+           //     System.out.print("\t\t");
+           }
+         // System.out.println("");
+       }
+      
+       
+     
+     
+     for(int i=0; i<6; i++)
+       {
+           for(int j=0; j<6; j++)
+           {
+            for(int k=0; k<6; k++)
+       {
+           p: for(int l=0; l<6; l++)
+           {   
+               if((i==k)&&(j==l))
+                   continue p;
+               else if(ch[i][j]==ch[k][l])
+               ch[i][j]=sy[i][j];
+           }
+          //System.out.println("");
+       }
+           }
+       } 
+     
+     //System.out.println("The modified character matrix is as under");
+       for(int i=0; i<6; i++)
+       {
+           for(int j=0; j<6; j++)
+           {
+            //   System.out.print(ch[i][j]);  
+           //  System.out.print("\t\t");  
+           }
+         // System.out.println("");
+       }
+     
+    
+       System.out.println("Encoded file is as under:");
+       java.io.File file1= new java.io.File("Sample1Mb.txt");
+        
+           try{ Scanner input1= new Scanner(file1);
+            
+            while(input1.hasNext())
+            { 
+                s= input1.nextLine();
+              char[] c=s.toCharArray();
+             
+             //System.out.print(s);
+              int sz=c.length;
+              for(int i=0;i<sz;i++)
+              {
+                  switch(c[i])
+                  {
+               case 'a':
+               c[i]=ch[0][0];
+               break;
+               case 'b': 
+              c[i]=ch[0][1];
+                    break;
+              case 'c': 
+              c[i]=ch[0][2];
+                   break;
+               case 'd':
+               c[i]=ch[0][3];
+                    break;
+           case 'e': 
+              c[i]=ch[0][4];
+                break;
+              case 'f':
+               c[i]=ch[0][5];
+                   break;
+      case 'g': 
+           c[i]=ch[1][0];
+           break;
+             case 'h':
+               c[i]=ch[1][1];
+                  break;
+            case 'i':  
+               c[i]=ch[1][2];
+                 break;
+           case 'j': 
+                c[i]=ch[1][3];
+                break;
+          case 'k': 
+               c[i]=ch[1][4];
+               break;
+             case 'l':
+                c[i]=ch[1][5];
+                  break;
+      case 'm': 
+           c[i]=ch[2][0];
+           break;
+            case 'n': 
+                 c[i]=ch[2][1];
+                 break;
+        case 'o': 
+               c[i]=ch[2][2];
+             break;
+          case 'p':
+                c[i]=ch[2][3];
+                   break;
+          case 'q': 
+               c[i]=ch[2][4];
+                    break;
+          case 'r': 
+                c[i]=ch[2][5];
+                   break;
+      case 's':
+           c[i]=ch[3][0];
+                    break;
+         case 't': 
+              c[i]=ch[3][1];
+              break;
+           case 'u': 
+                c[i]=ch[3][2];
+                break;
+          case 'v':
+                c[i]=ch[3][3];
+               break;
+         case 'w': 
+               c[i]=ch[3][4];
+              break;
+              case 'x':  
+                c[i]=ch[3][5];
+                   break;
+              case 'y': 
+                c[i]=ch[4][0];
+                   break;
+            case 'z': 
+                c[i]=ch[4][1];
+                 break;
+ case '9':
+  c[i]=ch[4][2];
+      break;
+         case '8': 
+          c[i]=ch[4][3];
+              break;
+            case '7':
+               c[i]=ch[4][4]; 
+                   break;
+           case '6': 
+               c[i]=ch[4][5];
+                    break;
+             case '5':
+                c[i]=ch[5][0];
+                    break;
+             case '4':
+               c[i]=ch[5][1];
+                    break;
+             case '3': 
+               c[i]=ch[5][2];
+                    break;
+            case '2':  
+               c[i]=ch[5][3];
+                    break;
+              case '1': 
+               c[i]=ch[5][4];
+                    break;
+     case '0': 
+          c[i]=ch[5][5];  
+
+ break;   
+         
+     default:   
+}
+                          
+System.out.print(c[i]);
+
+}
+     System.out.println("");         
+            
+            }
+             
+      }
+        catch(FileNotFoundException e){
+          System.err.format("file does not exist\n");  
+        }        //System.out.print(sz);
+              //for(int i=0; i<sz; i++)
+              
+            
+      System.out.println("");
+      System.out.println("");
+  
+            System.out.println("The plain text is as under:"); 
+            
+           java.io.File file2= new java.io.File("yes.txt");
+        
+           try{ Scanner input2= new Scanner(file2);
+            
+            while(input2.hasNext())
+            { 
+                s= input2.nextLine();
+              char[] c=s.toCharArray();
+             
+             //System.out.print(s);
+              int sz=c.length;
+              for(int i=0;i<sz;i++)
+              {
+               if(c[i]==ch[0][0])  
+               {c[i]='a';}
+              else if(c[i]==ch[0][1])  
+              { c[i]='b';}
+              else if(c[i]==ch[0][2])  
+              { c[i]='c';}
+               else if(c[i]==ch[0][3])  
+               {  c[i]='d';}
+              else if(c[i]==ch[0][4])  
+              { c[i]='e';}
+               else if(c[i]==ch[0][5])  
+               { c[i]='f';}
+               else if(c[i]==ch[1][0])  
+               {c[i]='g';}
+              else if(c[i]==ch[1][1])  
+              {c[i]='h'  ;}
+              else if(c[i]==ch[1][2])  
+              {c[i]='i';}
+               else if(c[i]==ch[1][3])  
+               { c[i]='j';}
+              else if(c[i]==ch[1][4])  
+              { c[i]='k';}
+               else if(c[i]==ch[1][5])  
+               { c[i]='l';}
+         else if(c[i]==ch[2][0])  
+         { c[i]='m';}
+              else if(c[i]==ch[2][1])  
+              { c[i]='n';}
+              else if(c[i]==ch[2][2])  
+              {c[i]='o';}
+               else if(c[i]==ch[2][3])  
+               { c[i]='p';}
+              else if(c[i]==ch[2][4])  
+              { c[i]='q';}
+               else if(c[i]==ch[2][5])  
+               { c[i]='r';}
+         else if(c[i]==ch[3][0])  
+         { c[i]='s';}
+              else if(c[i]==ch[3][1])  
+              {c[i]='t';}
+              else if(c[i]==ch[3][2])  
+              { c[i]='u';}
+               else if(c[i]==ch[3][3])  
+               { c[i]='v';}
+              else if(c[i]==ch[3][4])  
+              {c[i]='w';}
+               else if(c[i]==ch[3][5])  
+               {c[i]='x';}
+               else if(c[i]==ch[4][0])  
+               {c[i]='y';}
+               else if(c[i]==ch[4][1])  
+               {c[i]='z';}
+  else if(c[i]==ch[4][2])  
+  { c[i]='9';}
+          if(c[i]==ch[4][3])  
+          { c[i]='8';}
+              else if(c[i]==ch[4][4])  
+              {c[i]='7' ;}
+              else if(c[i]==ch[4][5])  
+              {c[i]='6';}
+               else if(c[i]==ch[5][0])  
+               {c[i]='5';}
+              else if(c[i]==ch[5][1])  
+              {c[i]='4';}
+               else if(c[i]==ch[5][2])  
+               { c[i]='3';}
+               else if(c[i]==ch[5][3])  
+               {c[i]='2';}
+               else if(c[i]==ch[5][4])  
+               {c[i]='1' ;}        
+          else if(c[i]==ch[5][5])  
+          {c[i]='0' ; }       
+          
+          System.out.print(c[i]);
+              }
+             
+              System.out.println("");
+              
+              
+            } 
+            
+       }
+        catch(FileNotFoundException e){
+          System.err.format("file does not exist\n");  
+        } 
+        
+    }
+}
